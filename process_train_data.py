@@ -5,6 +5,7 @@ import pandas
 from datasets import Dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
+ds_path = '/scratch/network/cl5587/cee_datasets/'
 path = "meta-llama/Llama-2-7b-chat-hf"
 tokenizer = AutoTokenizer.from_pretrained(path)
 
@@ -33,8 +34,8 @@ def get_max_length(model):
 max_length = get_max_length(model)
 
 # create pandas dataframes. change names of excel sheets as necessary
-dataset_train = pandas.read_excel("170books_tr.xlsx")
-dataset_val = pandas.read_excel("170books_vd.xlsx")
+dataset_train = pandas.read_excel(ds_path + "dftr_fintune_60bk_2048tk_polished.xlsx")
+dataset_val = pandas.read_excel(ds_path + "dfvd_fintune_60bk_2048tk_polished.xlsx")
 
 # convert into Huggingface datasets
 dataset_train = Dataset.from_pandas(dataset_train)
@@ -68,8 +69,8 @@ print(dataset_train)
 print(dataset_val)
 
 # save to disk, change names as necessary
-dataset_train.save_to_disk("train170")
-dataset_val.save_to_disk("val170")
+dataset_train.save_to_disk(ds_path + "train60")
+dataset_val.save_to_disk(ds_path + "val60")
 
 
 

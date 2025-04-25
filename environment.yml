@@ -1,0 +1,14 @@
+name: hf
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch
+  - pandas
+  - tqdm
+  - cudatoolkit=11.8
+  - pip
+  - pip: 
+    - datasets
+    - peft 
+    - accelerate
