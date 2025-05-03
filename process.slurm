@@ -9,13 +9,12 @@
 #SBATCH --gres=gpu:1             # number of gpus per node
 #SBATCH --mail-type=end          # send email when job ends
 #SBATCH --mail-type=fail         # send email if job fails
-#SBATCH --mail-user=vi6908@princeton.edu
+#SBATCH --mail-user=cl5587@princeton.edu
 
 module purge
 module load anaconda3/2022.5
 
 conda activate hf
-
 
 HF_DATASETS_OFFLINE=1 HF_HUB_OFFLINE=1 \
 python process_train_data.py

@@ -6,8 +6,11 @@ from datasets import Dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 ds_path = '/scratch/network/cl5587/cee_datasets/'
-path = "meta-llama/Llama-2-7b-chat-hf"
-tokenizer = AutoTokenizer.from_pretrained(path)
+# cache_path = '/scratch/network/cl5587/ESE_QNA/.cache/models--'
+path = "/scratch/network/cl5587/ESE_QNA/.cache/"
+model_id = 'meta-llama/Llama-2-7b-chat-hf'
+# model_id = 'cl5587/Llama-2-7b-chat-hf-bnb-4bit'
+tokenizer = AutoTokenizer.from_pretrained(model_id, cache_dir=path, local_files_only=True)
 
 bnb_config = BitsAndBytesConfig(
         # 4 bit quantization
@@ -18,7 +21,8 @@ bnb_config = BitsAndBytesConfig(
         bnb_4bit_compute_dtype = torch.bfloat16,
 )
 
-model = AutoModelForCausalLM.from_pretrained(path, quantization_config=bnb_config)
+model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=bnb_config, cache_dir=path, local_files_only=True)
+# model = AutoModelForCausalLM.from_pretrained(model_id, device_map='auto', cache_dir=path, local_files_only=True)
 
 # get max input length for the mdoel
 def get_max_length(model):
