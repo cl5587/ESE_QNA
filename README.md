@@ -6,6 +6,6 @@ Install compatible pytorch: ```pip install torch==1.13.0+cu117.with.pypi.cudnn -
 
 ### Install package dependencies 
 Change library path: ```export LD_LIBRARY_PATH=/home/cl5587/.conda/envs/hf/lib/```\
-Install the requirements: ```pip install -r requirements.txt --no-deps```\
+Install the requirements: ```pip install -r requirements.txt --no-deps```
 
 Then run download_model.py on command line for offline access (make sure to change cache directory)
